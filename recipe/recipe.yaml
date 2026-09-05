@@ -30,7 +30,9 @@ tests:
       imports:
         - pymupdf_fonts
       pip_check: true
-      python_version: ${{ python_min }}
+      python_version:
+        - ${{ python_min }}
+        - "*"
 
 about:
   summary: Collection of font binaries for use in PyMuPDF
