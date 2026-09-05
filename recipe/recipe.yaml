@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: pymupdf-fonts
+  version: "1.0.5"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pymupdf_fonts-${{ version }}.tar.gz
+  sha256: ac12e3ec4affa35e9a0aca29135ef41c23bdbe5758c3355dac236986309e6bc6
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - pymupdf_fonts
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: Collection of font binaries for use in PyMuPDF
+  license: OFL-1.1
+  license_file: LICENSE.txt
+  homepage: https://github.com/pymupdf/pymupdf-fonts
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
